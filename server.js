@@ -14,16 +14,17 @@ db.once("open", () => console.log("Database successfully connected..."));
 //CRUD OPERATIONS
 async function runCRUDOperation() {
   console.log("Run CRUD Operation");
-  let id = "643a0e732aa934796a588f0d";
+  let id = "643a1d4a9019e473a011171f";
   let password = "password123";
   let hashPassword = await bcrypt.hash(password, 10);
 
   //CREATE
   //   const user = new User({
-  //     user_name: "jdelacruz",
-  //     email: "jdelacruz@email.com",
-  //     age: 21,
+  //     user_name: "jbond",
+  //     email: "jbond2@email.com",
+  //     age: 100,
   //     password: hashPassword,
+  //     createAt: "04/15/2023",
   //   });
 
   //   await user.save();
@@ -33,14 +34,16 @@ async function runCRUDOperation() {
   //   console.log(users);
 
   //UPDATE
-  //   const user = await User.findById(id);
-  //   user.user_name = "jdoe";
-  //   user.email = "jdoe@email.com";
-  //   user.password = "password123";
-  //   user.age = 22;
+  const user = await User.findById(id);
+  // user.user_name = "jdoe";
+  // user.email = "jdoe@email.com";
+  // user.password = "password123";
+  // user.age = 22;
 
-  //   const updatedUser = await user.save();
-  //   console.log(updatedUser);
+  user.createdAt = "2023-04-14T03:43:06.297+00:00";
+
+  const updatedUser = await user.save();
+  console.log(updatedUser);
 
   //DELETE
   //await User.findByIdAndDelete(id);
