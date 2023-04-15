@@ -12,43 +12,48 @@ db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Database successfully connected..."));
 
 //CRUD OPERATIONS
-async function runCRUDOperation() {
-  console.log("Run CRUD Operation");
-  let id = "643a1d4a9019e473a011171f";
-  let password = "password123";
-  let hashPassword = await bcrypt.hash(password, 10);
+let id = "643a1d4a9019e473a011171f";
+let password = "password123";
+// let hashPassword = await bcrypt.hash(password, 10);
 
-  //CREATE
-  //   const user = new User({
-  //     user_name: "jbond",
-  //     email: "jbond2@email.com",
-  //     age: 100,
-  //     password: hashPassword,
-  //     createAt: "04/15/2023",
-  //   });
+//CREATE
+// const user = new User({
+//   user_name: "jbond",
+//   email: "jbond2@email.com",
+//   age: 100,
+//   password: hashPassword,
+// });
 
-  //   await user.save();
+// await user.save();
 
-  //RETRIEVE
-  //   const users = await User.findById(id);
-  //   console.log(users);
+app.get("/create_user", async (req, res) => {
+  const user = await User.create({
+    user_name: "admin",
+    email: "admin@email.com",
+    password: "password123",
+  });
 
-  //UPDATE
-  const user = await User.findById(id);
-  // user.user_name = "jdoe";
-  // user.email = "jdoe@email.com";
-  // user.password = "password123";
-  // user.age = 22;
+  res.status(201).json({ msg: `Data inserted with id ${user._id}` });
+});
 
-  user.createdAt = "2023-04-14T03:43:06.297+00:00";
+//RETRIEVE
+//   const users = await User.findById(id);
+//   console.log(users);
 
-  const updatedUser = await user.save();
-  console.log(updatedUser);
+//UPDATE
+// const user = await User.findById(id);
+// user.user_name = "jdoe";
+// user.email = "jdoe@email.com";
+// user.password = "password123";
+// user.age = 22;
 
-  //DELETE
-  //await User.findByIdAndDelete(id);
-}
+// user.createdAt = "2023-04-14T03:43:06.297+00:00";
 
-runCRUDOperation();
+// const updatedUser = await user.save();
+// console.log(updatedUser);
+
+//DELETE
+//await User.findByIdAndDelete(id);
+// }
 
 app.listen(5000, () => console.log("Server started..."));
